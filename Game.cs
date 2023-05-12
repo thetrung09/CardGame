@@ -35,14 +35,17 @@ namespace Card_Game
                 new Player("Player 3"),
                 new Player("Player 4"),
             };
-            foreach (var player in listOfPlayers)
+            for(int j = 0; j < numOfCards; j++)
             {
-                Console.WriteLine($"\n------------------ {player.Name} ------------------");
-                for (int j = 0; j < numOfCards; j++)
+                foreach (var player in listOfPlayers)
                 {
                     var card = deck.PopCard();
                     player.AddCard(card);
                 }
+            }
+            foreach (var player in listOfPlayers)
+            {
+                Console.WriteLine($"\n------------------ {player.Name} ------------------");
                 player.PrintCard();
                 HandValuator handValuator = new HandValuator(player.Cards);
                 player.HandValue = handValuator.GetHand();
@@ -52,7 +55,7 @@ namespace Card_Game
             Console.WriteLine("\n\n-------------------- 4. Evaluate the winner --------------------");
             var maxHandValue = listOfPlayers?.Max(m => m.HandValue);
             var Winner = listOfPlayers?.FirstOrDefault(m => m.HandValue == maxHandValue);
-            Console.WriteLine($"Winner is: {Winner?.Name}");
+            Console.WriteLine($"\nWinner is: {Winner?.Name}");
             Winner?.HandValue?.PrintHandValue();
         }
     }
